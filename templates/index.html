@@ -113,6 +113,52 @@
           });
         });
       </script>
+      <input type="date" id="date-input" />
+      <button onclick="chargerGraphique()">Afficher</button>
+      <canvas id="graphique"></canvas>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        let chart = null;
+
+        async function chargerGraphique() {
+          const date = document.getElementById("date-input").value;
+          if (!date) return;
+
+          const response = await fetch(`/graphique?date_debut=${date}`);
+          const json = await response.json();
+          const data = json.data;
+          const labels = data.map(d => d.date);
+          const prix = data.map(d => parseFloat(d.prix_pompe));
+          
+          if (chart) chart.destroy();
+          chart = new Chart(document.getElementById("graphique"), {
+            type: "line",
+            data: {
+              labels,
+              datasets: [{
+                label: "Prix à la pompe (¢/L)",
+                data: prix,
+                borderColor: "#00e676",
+                backgroundColor: "rgba(0, 230, 118, 0.1)",
+                pointBackgroundColor: "#00e676",
+                tension: 0.3,
+                fill: true,
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { labels: { color: "#fff" } }
+              },
+              scales: {
+                x: { ticks: { color: "#aaa" }, grid: { color: "#333" } },
+                y: { ticks: { color: "#aaa", callback: v => v + "¢" }, grid: { color: "#333" } }
+              }
+            }
+          });
+        }
+      </script>
     </main>
     <footer style="background-color: #003DA5; color: white; padding: 20px 40px; text-align: center;">
       <a href="index.html" style="color: white; text-decoration: none; margin: 0 15px;">Accueil</a>
