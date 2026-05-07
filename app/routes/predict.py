@@ -8,8 +8,8 @@ from app.services.predictor import predict_future
 router = APIRouter()
 
 
-@router.get("/predict")
-def predict():
+@router.get("/today")
+def today():
     prix = get_prix_regie()
     if prix is None:
         return {"erreur": "Impossible de fetch les données"}

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.routes.predict import router as predict_router
+from app.routes.predict import router as today_router
 from app.routes.prix import router as prix_router
 from app.routes.region import router as region_router
 from app.routes.graphique import router as graphique_router
@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(predict_router)
+app.include_router(today_router)
 app.include_router(prix_router)
 app.include_router(region_router)
 app.include_router(graphique_router)

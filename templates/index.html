@@ -113,9 +113,16 @@
           });
         });
       </script>
-      <input type="date" id="date-input" />
-      <button onclick="chargerGraphique()">Afficher</button>
-      <canvas id="graphique"></canvas>
+      <p style="max-width: 600px; margin: 40px auto 0; font-size: 18px; color: #555;">
+        Sélectionnez une date pour afficher l'évolution des prix de l'essence au Québec.
+      </p>
+      <div id="nav" style="margin-top: 20px;">
+        <input type="date" id="date-input" style="background-color: white; color: #003DA5; border: 2px solid #003DA5; border-radius: 8px; padding: 10px 28px; font-size: 20px; font-family: 'Lucida Sans', sans-serif; cursor: pointer; margin: 0 8px;"/>
+        <button onclick="chargerGraphique()">Afficher</button>
+      </div>
+      <div style="margin-top: 30px; display: flex; justify-content: center;">
+        <canvas id="graphique" height="400" width="1000"></canvas>
+      </div>
 
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
@@ -139,9 +146,9 @@
               datasets: [{
                 label: "Prix à la pompe (¢/L)",
                 data: prix,
-                borderColor: "#00e676",
-                backgroundColor: "rgba(0, 230, 118, 0.1)",
-                pointBackgroundColor: "#00e676",
+                borderColor: "#003DA5",
+                backgroundColor: "rgba(0, 61, 165, 0.1)",
+                pointBackgroundColor: "#003DA5",
                 tension: 0.3,
                 fill: true,
               }]
