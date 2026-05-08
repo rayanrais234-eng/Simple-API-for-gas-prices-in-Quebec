@@ -1,6 +1,7 @@
 import csv
 from datetime import date
 from app.config import CSV_PATH
+import numpy 
 
 
 def load_prix():
@@ -34,5 +35,8 @@ def get_tendance():
 
 
 def get_historique(date_debut: date):
-    today = date.today()
-    return [l for l in load_prix() if date_debut <= date.fromisoformat(l["date"]) <= today]
+    lignes = [l for l in load_prix() if date_debut <= date.fromisoformat(l["date"])]
+    x = [date.fromisoformat(l["date"]).toordinal() for l in lignes]
+    y = [float(l["prix_pompe"]) for l in lignes]
+    a, b = numpy.polyfit(x, y, 1)
+    return [{"date": l["date"], "prix_pompe": l["prix_pompe"], "tendance": round(a * date.fromisoformat(l["date"]).toordinal() + b, 2)} for l in lignes]

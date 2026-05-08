@@ -136,6 +136,7 @@
           const json = await response.json();
           const data = json.data;
           const labels = data.map(d => d.date);
+          const tendance = data.map(d => d.tendance);
           const prix = data.map(d => parseFloat(d.prix_pompe));
 
           if (chart) chart.destroy();
@@ -151,13 +152,30 @@
                 pointBackgroundColor: "#003DA5",
                 tension: 0.3,
                 fill: true,
+              }, {
+                label: "tendance",
+                data: tendance,
+                borderColor: "#FF5733",
+                backgroundColor: "rgba(255, 87, 51, 0.1)",
+                pointBackgroundColor: "#FF5733",
+                pointRadius: 0,
+                tension: 0.3,
+                fill: false,
               }]
             },
             options: {
               responsive: false,
               plugins: {
-                legend: { display: true },
-                tooltip: { mode: "index", intersect: false }
+                legend: { 
+                  display: true,
+                },
+                tooltip: {
+                  mode: "index",
+                  intersect: false,
+                  callbacks: {
+                    label: (item) => item.dataset.label === "tendance" ? null : `${item.dataset.label}: ${item.formattedValue}`
+                  }
+                },
               },
               scales: {
                 y: {
@@ -166,7 +184,6 @@
                 },
                 x: {
                   ticks: { font: { size: 13 } },
-                  grid: { display: false }
                 }
               }
             }

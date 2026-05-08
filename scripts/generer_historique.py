@@ -155,7 +155,7 @@ html = f"""<!DOCTYPE html>
   </body>
 </html>"""
 
-with open(os.path.join(BASE_DIR, "templates", "historique.html"), "w", encoding="utf-8") as f:
+with open(os.path.join(BASE_DIR, "docs", "historique.html"), "w", encoding="utf-8") as f:
     f.write(html)
 
 print("historique.html mis à jour !")
