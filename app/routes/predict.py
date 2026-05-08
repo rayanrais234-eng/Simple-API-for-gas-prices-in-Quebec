@@ -7,7 +7,6 @@ from app.services.predictor import predict_future
 
 router = APIRouter()
 
-
 @router.get("/today")
 def today():
     prix = get_prix_regie()
@@ -23,7 +22,6 @@ def today():
         "prix_predit_dollars": round(prix / 100, 4),
         "tendance": get_tendance(),
     }
-
 
 @router.get("/predict/futur")
 def predict_futur(jours: int = 7):
