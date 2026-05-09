@@ -27,7 +27,7 @@ def get_usdcad():
 
 def get_tendance_wti():
     try:
-        data = _fetch_yahoo("CL=F", range_="5d")
+        data = _fetch_yahoo("CL=F", range_="10d")
         closes = [x for x in data["chart"]["result"][0]["indicators"]["quote"][0]["close"] if x is not None]
         return round((closes[-1] - closes[0]) / len(closes), 4)
     except Exception as e:
@@ -37,7 +37,7 @@ def get_tendance_wti():
 
 def get_tendance_usdcad():
     try:
-        data = _fetch_yahoo("USDCAD=X", range_="5d")
+        data = _fetch_yahoo("USDCAD=X", range_="10d")
         closes = [x for x in data["chart"]["result"][0]["indicators"]["quote"][0]["close"] if x is not None]
         return round((closes[-1] - closes[0]) / len(closes), 6)
     except Exception:
