@@ -7,7 +7,7 @@ from app.services.market import get_wti, get_usdcad, get_tendance_wti, get_tenda
 def _get_tendance_prix():
     try:
         df = pd.read_csv(CSV_PATH).sort_values("date").reset_index(drop=True)
-        derniers = df["prix_pompe"].iloc[-5:].values
+        derniers = df["prix_pompe"].iloc[-10:].values
         tendance_historique = (derniers[-1] - derniers[0]) / len(derniers)
 
         tendance_wti = get_tendance_wti()
