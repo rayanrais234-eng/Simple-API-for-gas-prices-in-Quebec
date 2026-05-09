@@ -23,7 +23,7 @@ else:
 regions = get_prix_par_region()
 if regions:
     nouvelles_lignes = pd.DataFrame([
-        {"date": today, "region": region, "prix": p}
+        {"date": str(date.today()), "region": region, "prix": p}
         for region, p in regions.items()
     ])
     if os.path.exists(CSV_REGIONS_PATH):
@@ -32,6 +32,6 @@ if regions:
     else:
         df_r = nouvelles_lignes
     df_r.to_csv(CSV_REGIONS_PATH, index=False)
-    print(f"Prix régions ajoutés: {len(regions)} régions ({today})")
+    print(f"Prix régions ajoutés: {len(regions)} régions ({date.today()})")
 else:
     print("Erreur: prix régions non récupérés")

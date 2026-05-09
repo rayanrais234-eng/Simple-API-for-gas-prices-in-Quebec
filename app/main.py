@@ -18,5 +18,5 @@ app.include_router(today_router)
 app.include_router(prix_router)
 app.include_router(region_router)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/", StaticFiles(directory="templates", html=True), name="templates")
+app.mount("/static", StaticFiles(directory="docs/static"), name="static")
+app.mount("/", StaticFiles(directory="docs", html=True), name="templates")
